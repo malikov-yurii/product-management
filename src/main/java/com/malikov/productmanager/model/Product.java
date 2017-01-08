@@ -2,23 +2,9 @@ package com.malikov.productmanager.model;
 
 import javax.persistence.*;
 
-//@NamedQueries({
-//        @NamedQuery(name = Product.DELETE, query = "DELETE FROM Product p WHERE p.id=:id"),
-//        @NamedQuery(name = Product.BY_CATEGORY_ID, query =
-//                "SELECT p FROM Product p JOIN p.categories c WHERE c.id=:categoryId"),
-//        @NamedQuery(name = Product.QUANTITY_LESS_THAN, query =
-//                "SELECT p FROM Product p WHERE p.quantity < :quantity"),
-//        @NamedQuery(name = Product.ALL_SORTED, query = "SELECT p FROM Product p ORDER BY p.price"),
-//})
 @Entity
 @Table(name = "products")
 public class Product{
-
-
-//    public static final String DELETE = "Product.delete";
-//    public static final String BY_CATEGORY_ID = "Product.getByCategoryId";
-//    public static final String QUANTITY_LESS_THAN = "Product.getQuantityLessThan";
-//    public static final String ALL_SORTED = "Product.getAllSorted";
 
     @Id
     @Column(name = "id")
