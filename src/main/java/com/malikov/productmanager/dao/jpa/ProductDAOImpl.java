@@ -1,5 +1,6 @@
-package com.malikov.productmanager.dao;
+package com.malikov.productmanager.dao.jpa;
 
+import com.malikov.productmanager.dao.ProductDAO;
 import com.malikov.productmanager.model.Product;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
