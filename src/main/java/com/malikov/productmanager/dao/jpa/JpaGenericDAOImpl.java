@@ -2,15 +2,13 @@ package com.malikov.productmanager.dao.jpa;
 
 import com.malikov.productmanager.dao.GenericDAO;
 import com.malikov.productmanager.model.NamedEntity;
+import org.springframework.core.GenericTypeResolver;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import java.lang.reflect.ParameterizedType;
 import java.util.List;
 
 public abstract class JpaGenericDAOImpl<T extends NamedEntity> implements GenericDAO<T> {
-
-    private final Class<T> clazz;
 
     @PersistenceContext
     EntityManager em;
@@ -35,7 +33,7 @@ public abstract class JpaGenericDAOImpl<T extends NamedEntity> implements Generi
     @Override
     public T get(int id) {
         T t = null;
-        t = em.find(clazz, id);
+        t = em.find(getClazz(), id);
         return t;
     }
 
@@ -45,8 +43,7 @@ public abstract class JpaGenericDAOImpl<T extends NamedEntity> implements Generi
         return (List<T>) em.createQuery("FROM T").getResultList();
     }
 
-    public JpaGenericDAOImpl() {
-        ParameterizedType genericSuperclass = (ParameterizedType) getClass().getGenericSuperclass();
-        this.clazz = (Class) genericSuperclass.getActualTypeArguments()[1];
+    protected Class<T> getClazz() {
+        return (Class<T>) GenericTypeResolver.resolveTypeArgument(getClass(), JpaGenericDAOImpl.class);
     }
 }
