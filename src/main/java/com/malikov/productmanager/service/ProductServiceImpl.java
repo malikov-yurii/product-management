@@ -13,13 +13,13 @@ public class ProductServiceImpl implements ProductService {
     @Override
     @Transactional
     public void add(Product product) {
-        productDAO.add(product);
+        productDAO.save(product);
     }
 
     @Override
     @Transactional
     public void update(Product product) {
-        productDAO.update(product);
+        productDAO.save(product);
     }
 
     @Override
