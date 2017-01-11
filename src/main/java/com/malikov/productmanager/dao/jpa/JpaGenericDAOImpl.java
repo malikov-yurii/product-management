@@ -40,7 +40,7 @@ public abstract class JpaGenericDAOImpl<T extends NamedEntity> implements Generi
     @Override
     @SuppressWarnings("unchecked")
     public List<T> getAll() {
-        return (List<T>) em.createQuery("FROM T").getResultList();
+        return (List<T>) em.createQuery("FROM " + getClazz().getSimpleName()).getResultList();
     }
 
     protected Class<T> getClazz() {

@@ -49,7 +49,7 @@
 </head>
 <body>
 <br/>
-<a href="../../index.jsp">Back to main menu</a>
+<a href="../tempbuffer/index.jsp">Back to main menu</a>
 <br/><br/>
 <%--<a href="user-get-name-form.html">Find user by name</a>--%>
 <br/>

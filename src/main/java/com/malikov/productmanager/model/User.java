@@ -37,8 +37,8 @@ public class User extends NamedEntity {
         this(null, name, password, roles);
     }
 
-    public User(User u){
-        this(u.getId(), u.getName(), u.getPassword (), u.getRoles().toArray(new Role[0]));
+    public User(User u) {
+        this(u.getId(), u.getName(), u.getPassword(), u.getRoles().toArray(new Role[0]));
     }
 
     public String getPassword() {
@@ -55,6 +55,14 @@ public class User extends NamedEntity {
 
     public void setRoles(Set<Role> roles) {
         this.roles = roles;
+    }
+
+    public String getUsername() {
+        return name;
+    }
+
+    public void setUsername(String userName) {
+        this.name = userName;
     }
 
     public String getConfirmPassword() {
