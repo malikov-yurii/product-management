@@ -54,7 +54,7 @@ public class UserController {
 
     @RequestMapping(value = "/login", method = RequestMethod.GET)
     public String loginGet(Model model, String error, String logout) {
-//        if (error != null && !"".equals(error)) {
+
         if (error != null) {
             model.addAttribute("error", "Username or password is incorrect.");
         }
@@ -67,14 +67,6 @@ public class UserController {
 
         return "login";
 
-    }
-
-    @RequestMapping(value = "/login", method = RequestMethod.POST)
-    public String loginPost(@ModelAttribute("userForm") User userForm, BindingResult bindingResult, Model model) {
-
-        securityService.autoLogin(userForm.getName(), userForm.getPassword());
-
-        return "products";
     }
 
     @RequestMapping(value = {"/", "/welcome"}, method = RequestMethod.GET)

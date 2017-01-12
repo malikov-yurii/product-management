@@ -3,7 +3,17 @@
 <%@ taglib uri="http://www.springframework.org/tags" prefix="spring" %>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
 <%@ taglib prefix="from" uri="http://www.springframework.org/tags/form" %>
+
+
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
+<%@ page isELIgnored="false" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags"%>
+
+
+
 <%@ page session="false" %>
+
 <html>
 <head>
     <title>Products list</title>
@@ -65,26 +75,26 @@
         <display:column property="description" title="Description" sortable="false"/>
 
 
-                <%--<sec:authorize access="isAuthenticated()">--%>
-        <sec:authorize access="hasRole('ROLE_ADMIN')">
-            <display:column property="linkEdit" title="Edit"/>
-        </sec:authorize>
-                    <%--<a class="btn btn-info" role="button" href="profile">${userTo.name} <fmt:message key="app.profile"/></a>--%>
-                    <%--<input type="submit" class="btn btn-primary" value="<fmt:message key="app.logout"/>">--%>
+        <%--<sec:authorize access="isAuthenticated()">--%>
+        <%--<sec:authorize access="hasRole('ROLE_ADMIN')">--%>
+        <display:column property="linkEdit" title="Edit"/>
+        <%--</sec:authorize>--%>
+        <%--<a class="btn btn-info" role="button" href="profile">${userTo.name} <fmt:message key="app.profile"/></a>--%>
+        <%--<input type="submit" class="btn btn-primary" value="<fmt:message key="app.logout"/>">--%>
 
-                <%--</sec:authorize>--%>
+        <%--</sec:authorize>--%>
 
         <display:column property="linkDelete" title="Delete"/>
-
 
 
     </display:table>
 </c:if>
 
 
-<%--<sec:authorize access="hasRole('ROLE_ADMIN')">--%>
+<sec:authorize access="hasRole('ROLE_ADMIN')">
+<%--<sec:authorize access="hasRole('ADMIN')">--%>
     <h2>Add/Edit a product</h2>
-<%--</sec:authorize>--%>
+</sec:authorize>
 
 <c:url var="addAction" value="/products/add"/>
 <form:form action="${addAction}" commandName="product">

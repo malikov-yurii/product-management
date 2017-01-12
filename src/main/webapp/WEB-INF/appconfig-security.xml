@@ -7,7 +7,15 @@
 		http://www.springframework.org/schema/security
 		http://www.springframework.org/schema/security/spring-security.xsd">
 
-    <http auto-config="true">
+    <!--<http pattern="/products"  use-expressions="true" create-session="stateless">-->
+        <!--<http-basic/>-->
+        <!--<intercept-url pattern="/products" access="hasAnyRole('ROLE_USER', 'ROLE_ADMIN')"/>-->
+        <!--<csrf disabled="true"/>-->
+    <!--</http>-->
+
+    <http  use-expressions="true" auto-config="true">
+
+
         <intercept-url pattern="/" access="hasAnyRole('ROLE_USER', 'ROLE_ADMIN')"/>
         <intercept-url pattern="/products" access="hasAnyRole('ROLE_USER', 'ROLE_ADMIN')"/>
         <!--<intercept-url pattern="/products" access="hasRole('ROLE_ADMIN')"/>-->
