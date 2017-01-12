@@ -1,6 +1,8 @@
 package com.malikov.productmanager.controller;
 
+import com.malikov.productmanager.model.Product;
 import com.malikov.productmanager.model.User;
+import com.malikov.productmanager.service.ProductService;
 import com.malikov.productmanager.service.SecurityService;
 import com.malikov.productmanager.service.UserService;
 import com.malikov.productmanager.validator.UserValidator;
@@ -15,6 +17,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 @Controller
 public class UserController {
+
+    @Autowired
+    private ProductService productService;
 
     @Autowired
     private UserService userService;
@@ -48,7 +53,8 @@ public class UserController {
     }
 
     @RequestMapping(value = "/login", method = RequestMethod.GET)
-    public String login(Model model, String error, String logout) {
+    public String loginGet(Model model, String error, String logout) {
+//        if (error != null && !"".equals(error)) {
         if (error != null) {
             model.addAttribute("error", "Username or password is incorrect.");
         }
@@ -57,7 +63,18 @@ public class UserController {
             model.addAttribute("message", "Logged out successfully.");
         }
 
+        model.addAttribute("userForm", new Product());
+
         return "login";
+
+    }
+
+    @RequestMapping(value = "/login", method = RequestMethod.POST)
+    public String loginPost(@ModelAttribute("userForm") User userForm, BindingResult bindingResult, Model model) {
+
+        securityService.autoLogin(userForm.getName(), userForm.getPassword());
+
+        return "products";
     }
 
     @RequestMapping(value = {"/", "/welcome"}, method = RequestMethod.GET)

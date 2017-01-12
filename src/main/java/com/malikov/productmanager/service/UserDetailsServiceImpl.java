@@ -11,7 +11,6 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.transaction.annotation.Transactional;
 
-import javax.persistence.NoResultException;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -23,14 +22,10 @@ public class UserDetailsServiceImpl implements UserDetailsService {
     @Override
     @Transactional(readOnly = true)
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        try {
-            User user = userDAO.findByName(username);
-            Set<GrantedAuthority> authorities = new HashSet<>();
-            for (Role role : user.getRoles())
-                authorities.add(new SimpleGrantedAuthority(role.getAuthority()));
-            return new org.springframework.security.core.userdetails.User(user.getName(), user.getPassword(), authorities);
-        }catch (NoResultException e){
-            throw new UsernameNotFoundException("User not found by login in db");
-        }
+        User user = userDAO.findByName(username);
+        Set<GrantedAuthority> authorities = new HashSet<>();
+        for (Role role : user.getRoles())
+            authorities.add(new SimpleGrantedAuthority(role.getAuthority()));
+        return new org.springframework.security.core.userdetails.User(user.getName(), user.getPassword(), authorities);
     }
 }

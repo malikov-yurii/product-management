@@ -27,12 +27,12 @@
 
 <div class="container">
 
-    <form method="POST" action="${contextPath}/login" class="form-signin">
+    <form method="POST" modelAttribute="userForm" action="${contextPath}/login" class="form-signin">
         <h2 class="form-heading">Log in</h2>
 
         <div class="form-group ${error != null ? 'has-error' : ''}">
             <span>${message}</span>
-            <input name="name" type="text" class="form-control" placeholder="Name"
+            <input name="username" type="text" class="form-control" placeholder="Username"
                    autofocus="true"/>
             <input name="password" type="password" class="form-control" placeholder="Password"/>
             <span>${error}</span>

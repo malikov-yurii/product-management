@@ -63,28 +63,12 @@
         <display:column property="producer" title="Producer" sortable="false"/>
         <display:column property="price" title="Price" sortable="false"/>
         <display:column property="description" title="Description" sortable="false"/>
-
-
-                <%--<sec:authorize access="isAuthenticated()">--%>
-        <sec:authorize access="hasRole('ROLE_ADMIN')">
-            <display:column property="linkEdit" title="Edit"/>
-        </sec:authorize>
-                    <%--<a class="btn btn-info" role="button" href="profile">${userTo.name} <fmt:message key="app.profile"/></a>--%>
-                    <%--<input type="submit" class="btn btn-primary" value="<fmt:message key="app.logout"/>">--%>
-
-                <%--</sec:authorize>--%>
-
+        <display:column property="linkEdit" title="Edit"/>
         <display:column property="linkDelete" title="Delete"/>
-
-
-
     </display:table>
 </c:if>
 
-
-<%--<sec:authorize access="hasRole('ROLE_ADMIN')">--%>
-    <h2>Add/Edit a product</h2>
-<%--</sec:authorize>--%>
+<h2>Add/Edit a product</h2>
 
 <c:url var="addAction" value="/products/add"/>
 <form:form action="${addAction}" commandName="product">
