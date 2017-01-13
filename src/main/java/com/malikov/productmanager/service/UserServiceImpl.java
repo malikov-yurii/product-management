@@ -17,6 +17,7 @@ public class UserServiceImpl implements UserService {
     @Autowired
     private UserDAO userDAO;
 
+    @Autowired
     private BCryptPasswordEncoder encoder;
 
     @Override
@@ -32,14 +33,4 @@ public class UserServiceImpl implements UserService {
     public User findByName(String name) {
         return userDAO.findByName(name);
     }
-
-    public void setEncoder(BCryptPasswordEncoder encoder) {
-        this.encoder = encoder;
-    }
-
-    public void setUserDAO(UserDAO userDAO) {
-        this.userDAO = userDAO;
-    }
-
-
 }

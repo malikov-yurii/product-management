@@ -5,11 +5,10 @@
 <%@ taglib prefix="from" uri="http://www.springframework.org/tags/form" %>
 
 
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1" %>
 <%@ page isELIgnored="false" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags"%>
-
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 
 
 <%@ page session="false" %>
@@ -58,11 +57,17 @@
     </style>
 </head>
 <body>
-<br/>
-<a href="../tempbuffer/index.jsp">Back to main menu</a>
-<br/><br/>
-<%--<a href="user-get-name-form.html">Find user by name</a>--%>
-<br/>
+
+<div class="container">
+    <c:if test="${pageContext.request.userPrincipal.name != null}">
+        <form id="logoutForm" method="POST" action="${contextPath}/logout">
+            <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+        </form>
+        <h2>Welcome, ${pageContext.request.userPrincipal.name}!  | <a onclick="document.forms['logoutForm'].submit()" style="text-decoration: underline; color: blue">Logout</a>
+        </h2>
+    </c:if>
+</div>
+
 <h2>List of products</h2>
 <c:if test="${!empty listProducts}">
 
@@ -73,92 +78,79 @@
         <display:column property="producer" title="Producer" sortable="false"/>
         <display:column property="price" title="Price" sortable="false"/>
         <display:column property="description" title="Description" sortable="false"/>
-
-
-        <%--<sec:authorize access="isAuthenticated()">--%>
-        <%--<sec:authorize access="hasRole('ROLE_ADMIN')">--%>
-        <display:column property="linkEdit" title="Edit"/>
-        <%--</sec:authorize>--%>
-        <%--<a class="btn btn-info" role="button" href="profile">${userTo.name} <fmt:message key="app.profile"/></a>--%>
-        <%--<input type="submit" class="btn btn-primary" value="<fmt:message key="app.logout"/>">--%>
-
-        <%--</sec:authorize>--%>
-
-        <display:column property="linkDelete" title="Delete"/>
-
-
+        <sec:authorize access="hasRole('ROLE_ADMIN')">
+            <display:column property="linkEdit" title="Edit"/>
+            <display:column property="linkDelete" title="Delete"/>
+        </sec:authorize>
     </display:table>
 </c:if>
 
-
 <sec:authorize access="hasRole('ROLE_ADMIN')">
-<%--<sec:authorize access="hasRole('ADMIN')">--%>
     <h2>Add/Edit a product</h2>
-</sec:authorize>
-
-<c:url var="addAction" value="/products/add"/>
-<form:form action="${addAction}" commandName="product">
-    <table>
-        <c:if test="${!empty product.name}">
+    <c:url var="addAction" value="/products/add"/>
+    <form:form action="${addAction}" commandName="product">
+        <table>
+            <c:if test="${!empty product.name}">
+                <tr>
+                    <td>
+                        <form:label path="id">
+                            <spring:message text="ID"/>
+                        </form:label>
+                    </td>
+                    <td>
+                        <form:input path="id" readonly="true" size="8" disabled="true"/>
+                        <form:hidden path="id"/>
+                    </td>
+                </tr>
+            </c:if>
             <tr>
                 <td>
-                    <form:label path="id">
-                        <spring:message text="ID"/>
+                    <form:label path="name">
+                        <spring:message text="Name"/>
                     </form:label>
                 </td>
                 <td>
-                    <form:input path="id" readonly="true" size="8" disabled="true"/>
-                    <form:hidden path="id"/>
+                    <form:input path="name"/>
                 </td>
             </tr>
-        </c:if>
-        <tr>
-            <td>
-                <form:label path="name">
-                    <spring:message text="Name"/>
-                </form:label>
-            </td>
-            <td>
-                <form:input path="name"/>
-            </td>
-        </tr>
-        <tr>
-            <td>
-                <form:label path="producer">
-                    <spring:message text="Producer"/>
-                </form:label>
-            </td>
-            <td>
-                <form:input path="producer"/>
-            </td>
-        </tr>
-        <tr>
-            <td>
-                <form:label path="price">
-                    <spring:message text="Price"/>
-                </form:label>
-            </td>
-            <td>
-                <form:input path="price"/>
-            </td>
-        </tr>
-        <tr>
-            <td>
-                <form:label path="description">
-                    <spring:message text="Description"/>
-                </form:label>
-            </td>
-            <td>
-                <form:input path="description"/>
-            </td>
-        </tr>
-        <tr>
-            <td colspan="2">
-                <input type="submit" value="<spring:message text="Submit"/>"/>
-            </td>
-        </tr>
-    </table>
-</form:form>
+            <tr>
+                <td>
+                    <form:label path="producer">
+                        <spring:message text="Producer"/>
+                    </form:label>
+                </td>
+                <td>
+                    <form:input path="producer"/>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <form:label path="price">
+                        <spring:message text="Price"/>
+                    </form:label>
+                </td>
+                <td>
+                    <form:input path="price"/>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <form:label path="description">
+                        <spring:message text="Description"/>
+                    </form:label>
+                </td>
+                <td>
+                    <form:input path="description"/>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <input type="submit" value="<spring:message text="Submit"/>"/>
+                </td>
+            </tr>
+        </table>
+    </form:form>
+</sec:authorize>
 
 </body>
 </html>

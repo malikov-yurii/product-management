@@ -4,7 +4,7 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "products")
-public class Product extends NamedEntity{
+public class Product extends NamedEntity {
 
     @Column(name = "producer")
     private String producer;

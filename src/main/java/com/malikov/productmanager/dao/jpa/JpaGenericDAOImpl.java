@@ -13,7 +13,6 @@ public abstract class JpaGenericDAOImpl<T extends NamedEntity> implements Generi
     @PersistenceContext
     EntityManager em;
 
-
     public T save(T t) {
         if (t.isNew()) {
             em.persist(t);
@@ -32,9 +31,7 @@ public abstract class JpaGenericDAOImpl<T extends NamedEntity> implements Generi
 
     @Override
     public T get(int id) {
-        T t = null;
-        t = em.find(getClazz(), id);
-        return t;
+        return em.find(getClazz(), id);
     }
 
     @Override
@@ -43,7 +40,8 @@ public abstract class JpaGenericDAOImpl<T extends NamedEntity> implements Generi
         return (List<T>) em.createQuery("FROM " + getClazz().getSimpleName()).getResultList();
     }
 
-    protected Class<T> getClazz() {
+    @SuppressWarnings("unchecked")
+    private Class<T> getClazz() {
         return (Class<T>) GenericTypeResolver.resolveTypeArgument(getClass(), JpaGenericDAOImpl.class);
     }
 }

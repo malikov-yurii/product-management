@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-
 @Controller
 public class UserController {
 
@@ -49,7 +48,7 @@ public class UserController {
 
         securityService.autoLogin(userForm.getName(), userForm.getConfirmPassword());
 
-        return "redirect:/welcome";
+        return "redirect:/products";
     }
 
     @RequestMapping(value = "/login", method = RequestMethod.GET)
@@ -66,16 +65,5 @@ public class UserController {
         model.addAttribute("userForm", new Product());
 
         return "login";
-
-    }
-
-    @RequestMapping(value = {"/", "/welcome"}, method = RequestMethod.GET)
-    public String welcome(Model model) {
-        return "welcome";
-    }
-
-    @RequestMapping(value = "/admin", method = RequestMethod.GET)
-    public String admin(Model model) {
-        return "admin";
     }
 }

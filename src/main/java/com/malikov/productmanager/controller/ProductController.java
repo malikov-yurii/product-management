@@ -2,6 +2,7 @@ package com.malikov.productmanager.controller;
 
 import com.malikov.productmanager.model.Product;
 import com.malikov.productmanager.service.ProductService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @Controller
 public class ProductController {
 
+    @Autowired
     private ProductService productService;
 
     @RequestMapping(value = "products", method = RequestMethod.GET)
@@ -48,10 +50,6 @@ public class ProductController {
     public String productdata(@PathVariable("id") int id, Model model) {
         model.addAttribute("product", productService.get(id));
         return "productdata";
-    }
-
-    public void setProductService(ProductService productService) {
-        this.productService = productService;
     }
 }
 

@@ -26,7 +26,7 @@ public class TableWrapper extends TableDecorator {
         Product lObject = (Product) getCurrentRowObject();
         int lId = lObject.getId();
 
-        return "<a href=\"" + "productdata/" + lId + "\" target=\"_blank\">"+ lObject.getName() +"</a>";
+        return "<a href=\"" + "productdata/" + lId + "\" target=\"_blank\">" + lObject.getName() + "</a>";
     }
 
 }

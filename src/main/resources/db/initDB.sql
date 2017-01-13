@@ -19,9 +19,9 @@ CREATE TABLE user_roles
 );
 
 CREATE TABLE products (
-  id               SERIAL PRIMARY KEY,
-  name             VARCHAR,
-  producer             VARCHAR,
-  price            FLOAT,
-  description         TEXT
+  id          SERIAL PRIMARY KEY,
+  name        VARCHAR,
+  producer    VARCHAR,
+  price       FLOAT,
+  description TEXT
 );

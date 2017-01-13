@@ -6,11 +6,10 @@ import javax.persistence.*;
 
 @MappedSuperclass
 @Access(AccessType.FIELD)
-public class NamedEntity{
+public class NamedEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    // PROPERTY access for id due to bug: https://hibernate.atlassian.net/browse/HHH-3718
     @Access(value = AccessType.PROPERTY)
     protected Integer id;
 
@@ -22,13 +21,13 @@ public class NamedEntity{
     public NamedEntity() {
     }
 
+    public boolean isNew() {
+        return (getId() == null);
+    }
+
     protected NamedEntity(Integer id, String name) {
         this.name = name;
         this.id = id;
-    }
-
-    public boolean isNew() {
-        return (getId() == null);
     }
 
     public Integer getId() {

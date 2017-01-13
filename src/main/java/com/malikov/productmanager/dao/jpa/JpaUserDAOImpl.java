@@ -3,15 +3,19 @@ package com.malikov.productmanager.dao.jpa;
 
 import com.malikov.productmanager.dao.UserDAO;
 import com.malikov.productmanager.model.User;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.slf4j.Logger;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.NoResultException;
 import javax.persistence.NonUniqueResultException;
 import javax.persistence.Query;
 
+import static org.slf4j.LoggerFactory.getLogger;
+
 @Repository
-public class JpaUserDAOImpl extends JpaGenericDAOImpl<User> implements UserDAO{
+public class JpaUserDAOImpl extends JpaGenericDAOImpl<User> implements UserDAO {
+
+    private static final Logger LOG = getLogger(JpaUserDAOImpl.class);
 
     @Override
     public User findByName(String name) {
@@ -23,9 +27,9 @@ public class JpaUserDAOImpl extends JpaGenericDAOImpl<User> implements UserDAO{
                 user = (User) query.getSingleResult();
             }
         } catch (NoResultException e) {
-//            LOG.error("Cannot find entity by name: " + name);
+            LOG.error("Cannot find entity by name: " + name);
         } catch (NonUniqueResultException e) {
-//            LOG.error("Error! Name should be unique! Several entities has been found by name: " + name);
+            LOG.error("Error! Name should be unique! Several entities has been found by name: " + name);
         }
         return user;
     }
