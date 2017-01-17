@@ -49,6 +49,9 @@
 
 </head>
 <body>
+<form action="${pageContext.request.contextPath}/products">
+    <input type="submit" value="Back to list of products" />
+</form>
 <h1>Product Details</h1>
 
 <table class="tg">
@@ -67,5 +70,7 @@
         <td>${product.description}</td>
     </tr>
 </table>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+<script src="${contextPath}/resources/js/bootstrap.min.js"></script>
 </body>
 </html>
