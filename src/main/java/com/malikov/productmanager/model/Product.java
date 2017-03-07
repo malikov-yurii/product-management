@@ -18,6 +18,21 @@ public class Product extends NamedEntity {
     public Product() {
     }
 
+    public Product(Integer id, String name, String producer, Integer price, String description) {
+        super(id, name);
+        this.producer = producer;
+        this.price = price;
+        this.description = description;
+    }
+
+    public Product(Product product) {
+        this(product.getId(), product.getName(), product.getProducer(), product.getPrice(), product.getDescription());
+    }
+
+    public Product(String name, String producer, Integer price, String description) {
+        this(null, name, producer, price, description);
+    }
+
     public String getProducer() {
         return producer;
     }
