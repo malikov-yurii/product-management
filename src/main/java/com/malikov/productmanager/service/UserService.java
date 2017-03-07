@@ -2,9 +2,13 @@ package com.malikov.productmanager.service;
 
 import com.malikov.productmanager.model.User;
 
+import java.util.List;
+
 public interface UserService {
 
-    void save(User user);
+    User save(User user);
 
     User findByName(String name);
+
+    List<User> getAll();
 }

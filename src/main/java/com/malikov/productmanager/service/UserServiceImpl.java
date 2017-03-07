@@ -10,6 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Collections;
 import java.util.HashSet;
+import java.util.List;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -22,15 +23,21 @@ public class UserServiceImpl implements UserService {
 
     @Override
     @Transactional
-    public void save(User user) {
+    public User save(User user) {
         user.setPassword(encoder.encode(user.getPassword()));
         user.setRoles(new HashSet<>(Collections.singletonList(Role.ROLE_USER)));
-        userDAO.save(user);
+        return userDAO.save(user);
     }
 
     @Override
     @Transactional
     public User findByName(String name) {
         return userDAO.findByName(name);
+    }
+
+    @Override
+    @Transactional
+    public List<User> getAll() {
+        return userDAO.getAll();
     }
 }

@@ -40,7 +40,6 @@ public class ProductServiceTest extends AbstractServiceTest {
         ProductTestData.MATCHER.assertCollectionEquals(
                 Arrays.asList(SHELLAC_MANETTI, FERRARIO_ROZOVYJ, BITUM_DIVOLO),
                 service.getAll());
-
     }
 
     @Test
